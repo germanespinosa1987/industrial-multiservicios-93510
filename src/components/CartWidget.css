@@ -1,0 +1,18 @@
+/* CartWidget.css */
+.cart-widget {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cart-widget:hover {
+  background: #f59e0b;
+}
+
+.cart-icon {
+  font-size: 1.3rem;
+}

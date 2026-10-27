@@ -1,0 +1,18 @@
+/* ItemListContainer.css */
+.item-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.item-list-title {
+  margin: 0 0 1.5rem;
+  color: #111827;
+}
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
