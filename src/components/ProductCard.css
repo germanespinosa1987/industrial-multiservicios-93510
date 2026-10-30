@@ -1,6 +1,6 @@
 /* ProductCard.css */
 .product-card {
-  width: 280px;
+  width: 100%;
   background: white;
   border-radius: 12px;
   overflow: hidden;
