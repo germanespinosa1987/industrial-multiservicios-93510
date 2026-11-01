@@ -1,5 +1,6 @@
 /* ItemListContainer.css */
 .item-list-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
@@ -11,8 +12,7 @@
 }
 
 .item-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
 }

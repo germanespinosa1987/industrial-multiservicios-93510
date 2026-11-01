@@ -1,19 +1,25 @@
+import { Container, Nav, Navbar as BsNavbar } from "react-bootstrap"
 import CartWidget from "./CartWidget"
-import "./Navbar.css"
 
 function Navbar() {
     return (
-        <header className="navbar">
-            <h2>Mi tienda</h2>
+        <BsNavbar expand="lg" bg="dark" data-bs-theme="dark" sticky="top" style={{boxShadow: "0 4px 12px rgba(0, 0, 0, 0.55)"}}>
+            <Container>
+                <BsNavbar.Brand href="#">Industrial Multiservicios</BsNavbar.Brand>
 
-            <nav>
-                <a href="#">Remeras</a>
-                <a href="#">Pantalones</a>
-                <a href="#">Zapatos</a>
-            </nav>
+                <BsNavbar.Toggle aria-controls="main-navbar" />
 
-            <CartWidget />
-        </header>
+                <BsNavbar.Collapse id="main-navbar">
+                    <Nav className="me-auto">
+                        <Nav.Link href="#">Inicio</Nav.Link>
+                        <Nav.Link href="#">Servicios</Nav.Link>
+                        <Nav.Link href="#">Contacto</Nav.Link>
+                    </Nav>
+
+                    <CartWidget />
+                </BsNavbar.Collapse>
+            </Container>
+        </BsNavbar>
     )
 }
 
