@@ -3,9 +3,15 @@ import CartWidget from "./CartWidget"
 
 function Navbar() {
     return (
-        <BsNavbar expand="lg" bg="dark" data-bs-theme="dark" sticky="top" style={{boxShadow: "0 4px 12px rgba(0, 0, 0, 0.55)"}}>
+        <BsNavbar expand="lg" data-bs-theme="dark" sticky="top" style={{backgroundColor: "#000", boxShadow: "0 4px 12px rgba(0, 0, 0, 0.55)"}}>
             <Container>
-                <BsNavbar.Brand href="#">Industrial Multiservicios</BsNavbar.Brand>
+                        <BsNavbar.Brand href="#">
+            <img
+                src="/images/logo.webp"
+                alt="Industrial Multiservicios"
+                height="56"
+            />
+        </BsNavbar.Brand>
 
                 <BsNavbar.Toggle aria-controls="main-navbar" />
 
