@@ -1,16 +1,66 @@
-# React + Vite
+# Industrial Multiservicios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sitio web de mantenimiento industrial desarrollado con React como proyecto del curso **React JS (comisión 93510)**. Muestra un catálogo de productos en tarjetas interactivas, con navegación y carrito.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Navbar responsive con React Bootstrap y widget de carrito
+- Catálogo de productos en tarjetas, renderizadas con props
+- Contador de cantidad en cada tarjeta (`useState`)
+- Botón de favorito en cada tarjeta
+- Grilla adaptable a distintos tamaños de pantalla
+- Footer
 
-## React Compiler
+## Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- React Bootstrap y Bootstrap
+- CSS
 
-## Expanding the ESLint configuration
+## Instalación y uso
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/germanespinosa1987/industrial-multiservicios-93510.git
+   ```
+2. Entrar a la carpeta e instalar las dependencias:
+   ```bash
+   cd industrial-multiservicios-93510
+   npm install
+   ```
+3. Iniciar el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+4. Abrir en el navegador la URL que muestra la terminal (normalmente `http://localhost:5173`).
+
+## Estructura del proyecto
+
+```
+industrial-multiservicios-93510/
+├── public/
+│   └── images/
+│       ├── bomba_industrial.webp
+│       ├── motor_electrico.webp
+│       ├── sensores_industriales.webp
+│       └── tablero_electrico.webp
+└── src/
+    ├── assets/
+    ├── components/
+    │   ├── CartWidget.jsx / .css
+    │   ├── Footer.jsx
+    │   ├── ItemCount.jsx / .css
+    │   ├── ItemListContainer.jsx / .css
+    │   ├── Navbar.jsx
+    │   ├── ProductCard.jsx / .css
+    │   └── Titulo.jsx
+    ├── App.jsx
+    ├── index.css
+    └── main.jsx
+```
+
+## Autor
+
+Alberto German Espinosa
+[germanespinosa1987](https://github.com/germanespinosa1987)
