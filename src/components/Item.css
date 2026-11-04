@@ -86,3 +86,13 @@
 .favorite-btn.active {
   background: #fee2e2;
 }
+
+.product-stock {
+  font-size: 0.85rem;
+  color: #10b981; /* verde para indicar stock disponible */
+  font-weight: bold;
+  margin-top: 0.25rem;
+  background: #d1fae5; /* fondo verde claro */
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+}

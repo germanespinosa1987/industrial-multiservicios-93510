@@ -1,8 +1,9 @@
 import { useState } from "react"
-import "./ProductCard.css"
+import "./Item.css"
 import ItemCount from "./ItemCount"
 
-function ProductCard({ nombre, descripcion, precio, categoria, imagen }) {
+function Item({ product }) {
+    const { name, description, price, category, image } = product
     const [esFavorito, setEsFavorito] = useState(false)
 
     const toggleFavorite = () => setEsFavorito(prev => !prev)
@@ -10,7 +11,7 @@ function ProductCard({ nombre, descripcion, precio, categoria, imagen }) {
     return (
         <article className="product-card">
             <div className="product-image">
-                <img src={imagen} alt={nombre} />
+                <img src={image} alt={name} />
                 <button
                     className={`favorite-btn ${esFavorito ? "active" : ""}`}
                     onClick={toggleFavorite}
@@ -21,14 +22,14 @@ function ProductCard({ nombre, descripcion, precio, categoria, imagen }) {
             </div>
 
             <div className="product-info">
-                <span className="product-category">{categoria}</span>
-                <h3>{nombre}</h3>
-                <p>{descripcion}</p>
-                <span className="product-price">{precio}</span>
+                <span className="product-category">{category}</span>
+                <h3>{name}</h3>
+                <p>{description}</p>
+                <span className="product-price">${price}</span>
                 <ItemCount />
             </div>
         </article>
     )
 }
 
-export default ProductCard
+export default Item
