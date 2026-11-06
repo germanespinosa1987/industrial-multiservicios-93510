@@ -50,10 +50,11 @@ industrial-multiservicios-93510/
     ├── components/
     │   ├── CartWidget.jsx / .css
     │   ├── Footer.jsx
+    │   ├── Item.jsx / .css
     │   ├── ItemCount.jsx / .css
+    |   ├── ItemList.jsx
     │   ├── ItemListContainer.jsx / .css
-    │   ├── Navbar.jsx
-    │   └── ProductCard.jsx / .css
+    │   └── Navbar.jsx
     ├── App.jsx
     ├── index.css
     └── main.jsx

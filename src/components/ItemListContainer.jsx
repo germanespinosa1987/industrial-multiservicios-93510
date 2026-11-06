@@ -1,42 +1,30 @@
+import { useState, useEffect } from "react"
+import { getProducts } from "../mocks/AsyncMoks"
+import ItemList from "./ItemList"
 import "./ItemListContainer.css"
-import ProductCard from "./ProductCard"
 
-function ItemListContainer({ greeting, subtitle }) {
+function ItemListContainer({greeting, subtitle}) {
+    const [items, setData] = useState([])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const data = await getProducts()
+            setData(data)
+        }
+        fetchProducts()
+    }, [])
+
+
     return (
         <section className="item-list-container">
             <h1 className="item-list-title">{greeting}</h1>
             <h2 className="item-list-subtitle">{subtitle}</h2>
 
-            <div className="item-list">
-                <ProductCard
-                    nombre="Bomba industrial"
-                    descripcion="Bomba industrial de alta calidad para uso en entornos industriales."
-                    precio="$199.99"
-                    categoria="Equipos"
-                    imagen="images/bomba_industrial.webp" />
-
-                <ProductCard 
-                    nombre="Motor eléctrico"
-                    descripcion="Motor eléctrico de alta calidad para uso en entornos industriales."
-                    precio="$299.99"
-                    categoria="Equipos"
-                    imagen="images/motor_electrico.webp" />
-
-                <ProductCard 
-                    nombre="Sensores industriales"
-                    descripcion="Sensores industriales de alta calidad para uso en entornos industriales."
-                    precio="$99.99"
-                    categoria="Equipos"
-                    imagen="images/sensores_industriales.webp" />
-
-                <ProductCard 
-                    nombre="Tablero electrico"
-                    descripcion="Tablero eléctrico de alta calidad para uso en entornos industriales."
-                    precio="$199.99"
-                    categoria="Equipos"
-                    imagen="images/tablero_electrico.webp" />   
-
-            </div>
+            {items.length === 0 ? (
+                <h2>Cargando productos...</h2>
+            ) : (
+                <ItemList items={items} />
+            )}
         </section>
     )
 }
