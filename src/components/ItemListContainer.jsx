@@ -3,7 +3,7 @@ import { getProducts } from "../mocks/AsyncMoks"
 import ItemList from "./ItemList"
 import "./ItemListContainer.css"
 
-function ItemListContainer() {
+function ItemListContainer({greeting, subtitle}) {
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -17,7 +17,8 @@ function ItemListContainer() {
 
     return (
         <section className="item-list-container">
-            <h2 className="item-list-title">Nuestros productos</h2>
+            <h1 className="item-list-title">{greeting}</h1>
+            <h2 className="item-list-subtitle">{subtitle}</h2>
 
             {data.length === 0 ? (
                 <p>Cargando productos...</p>

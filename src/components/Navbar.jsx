@@ -17,9 +17,9 @@ function Navbar() {
 
                 <BsNavbar.Collapse id="main-navbar">
                     <Nav className="me-auto">
-                        <Nav.Link href="#">Inicio</Nav.Link>
-                        <Nav.Link href="#">Servicios</Nav.Link>
-                        <Nav.Link href="#">Contacto</Nav.Link>
+                        <Nav.Link href="#">Bombas</Nav.Link>
+                        <Nav.Link href="#">Sensores</Nav.Link>
+                        <Nav.Link href="#">Motores</Nav.Link>
                     </Nav>
 
                     <CartWidget />

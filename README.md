@@ -53,8 +53,7 @@ industrial-multiservicios-93510/
     │   ├── ItemCount.jsx / .css
     │   ├── ItemListContainer.jsx / .css
     │   ├── Navbar.jsx
-    │   ├── ProductCard.jsx / .css
-    │   └── Titulo.jsx
+    │   └── ProductCard.jsx / .css
     ├── App.jsx
     ├── index.css
     └── main.jsx
