@@ -4,7 +4,7 @@ import ItemList from "./ItemList"
 import "./ItemListContainer.css"
 
 function ItemListContainer({greeting, subtitle}) {
-    const [data, setData] = useState([])
+    const [items, setData] = useState([])
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -20,10 +20,10 @@ function ItemListContainer({greeting, subtitle}) {
             <h1 className="item-list-title">{greeting}</h1>
             <h2 className="item-list-subtitle">{subtitle}</h2>
 
-            {data.length === 0 ? (
-                <p>Cargando productos...</p>
+            {items.length === 0 ? (
+                <h2>Cargando productos...</h2>
             ) : (
-                <ItemList items={data} />
+                <ItemList items={items} />
             )}
         </section>
     )
