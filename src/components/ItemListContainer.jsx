@@ -1,10 +1,11 @@
 import "./ItemListContainer.css"
 import ProductCard from "./ProductCard"
 
-function ItemListContainer() {
+function ItemListContainer({ greeting, subtitle }) {
     return (
         <section className="item-list-container">
-            <h2 className="item-list-title">Nuestros productos</h2>
+            <h1 className="item-list-title">{greeting}</h1>
+            <h2 className="item-list-subtitle">{subtitle}</h2>
 
             <div className="item-list">
                 <ProductCard

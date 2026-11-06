@@ -9,6 +9,14 @@
 .item-list-title {
   margin: 0 0 1.5rem;
   color: #111827;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.item-list-subtitle {
+  margin: 0 0 1.5rem;
+  color: #4b5563;
+  font-size: 1.25rem;
 }
 
 .item-list {
