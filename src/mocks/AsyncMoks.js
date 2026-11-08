@@ -5,7 +5,7 @@ const products = [
         description: "Bomba industrial de alta calidad para uso en entornos industriales.",
         price: 450000,
         category: "Perifericos",
-        image: "/images/bomba_industrial.webp",
+        img: "/images/bomba_industrial.webp",
         stock: 10
     },
     {
@@ -14,7 +14,7 @@ const products = [
         description: "Motor eléctrico de alta calidad para uso en entornos industriales.",
         price: 250000,
         category: "Electricidad",
-        image: "/images/motor_electrico.webp",
+        img: "/images/motor_electrico.webp",
         stock: 5
     },
     {
@@ -23,7 +23,7 @@ const products = [
         description: "Sensores industriales de alta calidad para uso en entornos industriales.",
         price: 150000,
         category: "Perifericos",
-        image: "/images/sensores_industriales.webp",
+        img: "/images/sensores_industriales.webp",
         stock: 15
     },
     {
@@ -32,7 +32,7 @@ const products = [
         description: "Tablero eléctrico de alta calidad para uso en entornos industriales.",
         price: 350000,
         category: "Equipos",
-        image: "/images/tablero_electrico.webp",
+        img: "/images/tablero_electrico.webp",
         stock: 20
     },
     {
@@ -41,7 +41,7 @@ const products = [
         description: "Equipos de mantenimiento de alta calidad para uso en entornos industriales.",
         price: 550000,
         category: "Equipos",
-        image: "/images/equipos_mantenimiento.webp",
+        img: "/images/equipos_mantenimiento.webp",
         stock: 20
     }
 ];

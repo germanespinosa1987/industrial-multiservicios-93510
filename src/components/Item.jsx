@@ -3,7 +3,7 @@ import "./Item.css"
 import ItemCount from "./ItemCount"
 
 function Item({ product }) {
-    const { name, description, price, category, image } = product
+    const { name, description, price, category, img, stock } = product
     const [esFavorito, setEsFavorito] = useState(false)
 
     const toggleFavorite = () => setEsFavorito(prev => !prev)
@@ -11,7 +11,7 @@ function Item({ product }) {
     return (
         <article className="product-card">
             <div className="product-image">
-                <img src={image} alt={name} />
+                <img src={img} alt={name} />
                 <button
                     className={`favorite-btn ${esFavorito ? "active" : ""}`}
                     onClick={toggleFavorite}
@@ -26,7 +26,8 @@ function Item({ product }) {
                 <h3>{name}</h3>
                 <p>{description}</p>
                 <span className="product-price">${price}</span>
-                <ItemCount />
+                <small className="text-muted">Stock: {stock}</small>
+                <ItemCount stock={stock} />
             </div>
         </article>
     )

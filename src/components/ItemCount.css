@@ -29,4 +29,12 @@
   font-weight: bold;
 }
 
+.item-count button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.item-count button:disabled:hover {
+  background: #9ca3af;
+}
 
