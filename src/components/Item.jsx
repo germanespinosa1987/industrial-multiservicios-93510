@@ -1,9 +1,8 @@
 import { useState } from "react"
 import "./Item.css"
-import ItemCount from "./ItemCount"
 
 function Item({ product }) {
-    const { name, description, price, category, img, stock } = product
+    const { name, price, category, img } = product
     const [esFavorito, setEsFavorito] = useState(false)
 
     const toggleFavorite = () => setEsFavorito(prev => !prev)
@@ -24,10 +23,8 @@ function Item({ product }) {
             <div className="product-info">
                 <span className="product-category">{category}</span>
                 <h3>{name}</h3>
-                <p>{description}</p>
                 <span className="product-price">${price}</span>
-                <small className="text-muted">Stock: {stock}</small>
-                <ItemCount stock={stock} />
+                <button className="detail-btn">Ver detalle</button>
             </div>
         </article>
     )
