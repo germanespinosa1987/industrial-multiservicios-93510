@@ -4,11 +4,12 @@ Sitio web de mantenimiento industrial desarrollado con React como proyecto del c
 
 ## Funcionalidades
 
-- Navbar responsive con React Bootstrap, links a categorías y widget de carrito
+- Navbar responsive con React Bootstrap, links a categorías y widget de carrito (`CartWidget`, por ahora solo visual, con una cantidad fija)
 - Navegación con React Router, sin recargar la página
 - Catálogo de productos cargado de forma asíncrona (promesa + `useEffect`), con estados de carga y error
 - Filtro de productos por categoría desde el navbar
 - Página de detalle de cada producto (`/item/:id`)
+- Página de error 404 para rutas que no existen, con link para volver al inicio
 - Listado dinámico con `.map()`, separado en `ItemListContainer`, `ItemList` e `Item`
 - Contador de cantidad en cada tarjeta (`useState`)
 - Botón de favorito en cada tarjeta
@@ -24,13 +25,16 @@ La navegación se hace con `react-router-dom`. Las rutas se definen en `App.jsx`
 | `/` | `ItemListContainer` | Todos los productos |
 | `/category/:categoryId` | `ItemListContainer` | Productos de una categoría |
 | `/item/:id` | `ItemDetailContainer` | Detalle de un producto |
+| `*` | `Error` | Página 404 para cualquier ruta que no exista |
 
 ```jsx
 <Routes>
-    <Route path="/" element={<ItemListContainer greeting="¡Bienvenido a mi App!" subtitle="Nuestros productos" />} />
-    <Route path="/category/:categoryId" element={<ItemListContainer greeting="Estas en la categoria:" subtitle="Productos disponibles:" />} />
-    <Route path="/item/:id" element={<ItemDetailContainer />} />
-    <Route path="*" element={<Error />} />
+    <Routes>
+          <Route path="/" element={<ItemListContainer greeting="¡Bienvenido a mi App!" subtitle="Nuestros productos" />} />
+          <Route path="/category/:categoryId" element={<ItemListContainer greeting="Estas en la categoria:" subtitle="Productos disponibles:" />} />
+          <Route path="/item/:id" element={<ItemDetailContainer />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
 </Routes>
 ```
 
@@ -163,6 +167,7 @@ industrial-multiservicios-93510/
     ├── assets/
     ├── components/
     │   ├── CartWidget.jsx / .css
+    │   ├── Error.jsx
     │   ├── Footer.jsx
     │   ├── Item.jsx / .css
     │   ├── ItemCount.jsx / .css
@@ -175,6 +180,7 @@ industrial-multiservicios-93510/
     │   └── AsyncMoks.js
     ├── services/
     │   └── getProductById.js
+    ├── App.css
     ├── App.jsx
     ├── index.css
     └── main.jsx
