@@ -2,31 +2,36 @@ import { useState, useEffect } from "react"
 import { getProducts } from "../mocks/AsyncMoks"
 import ItemList from "./ItemList"
 import "./ItemListContainer.css"
+import { useParams } from "react-router-dom"
 
 function ItemListContainer({ greeting, subtitle }) {
     const [items, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const { categoryId } = useParams()
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            setLoading(true)
-            setError(null)
-            try {
-                const data = await getProducts()
-                setData(data)
-            } catch (err) {
-                setError(err.message)
-            } finally {
-                setLoading(false)
-            }
+useEffect(() => {
+    const fetchProducts = async () => {
+        setLoading(true)
+        setError(null)
+        try {
+            const data = await getProducts()
+            const filtered = categoryId
+                ? data.filter((p) => p.category === categoryId)
+                : data
+            setData(filtered)
+        } catch (err) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
         }
-        fetchProducts()
-    }, [])
+    }
+    fetchProducts()
+}, [categoryId])
 
     return (
         <section className="item-list-container">
-            <h1 className="item-list-title">{greeting}</h1>
+            <h1 className="item-list-title">{greeting} {categoryId}</h1>
             <h2 className="item-list-subtitle">{subtitle}</h2>
 
             {loading && <h2>Cargando productos...</h2>}

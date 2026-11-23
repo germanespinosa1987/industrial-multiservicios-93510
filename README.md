@@ -1,22 +1,95 @@
 # Industrial Multiservicios
 
-Sitio web de mantenimiento industrial desarrollado con React como proyecto del curso **React JS (comisión 93510)**. Muestra un catálogo de productos en tarjetas interactivas, con navegación y carrito.
+Sitio web de mantenimiento industrial desarrollado con React como proyecto del curso **React JS (comisión 93510)**. Muestra un catálogo de productos en tarjetas interactivas, con navegación entre páginas (React Router), filtro por categoría, detalle de producto y widget de carrito.
 
 ## Funcionalidades
 
-- Navbar responsive con React Bootstrap y widget de carrito
+- Navbar responsive con React Bootstrap, links a categorías y widget de carrito
+- Navegación con React Router, sin recargar la página
 - Catálogo de productos cargado de forma asíncrona (promesa + `useEffect`), con estados de carga y error
+- Filtro de productos por categoría desde el navbar
+- Página de detalle de cada producto (`/item/:id`)
 - Listado dinámico con `.map()`, separado en `ItemListContainer`, `ItemList` e `Item`
 - Contador de cantidad en cada tarjeta (`useState`)
 - Botón de favorito en cada tarjeta
 - Grilla adaptable a distintos tamaños de pantalla
 - Footer
 
+## Navegación con React Router
+
+La navegación se hace con `react-router-dom`. Las rutas se definen en `App.jsx`:
+
+| Ruta | Componente | Qué muestra |
+|---|---|---|
+| `/` | `ItemListContainer` | Todos los productos |
+| `/category/:categoryId` | `ItemListContainer` | Productos de una categoría |
+| `/item/:id` | `ItemDetailContainer` | Detalle de un producto |
+
+```jsx
+<Routes>
+    <Route path="/" element={<ItemListContainer greeting="¡Bienvenido a mi App!" subtitle="Nuestros productos" />} />
+    <Route path="/category/:categoryId" element={<ItemListContainer greeting="Estas en la categoria:" subtitle="Productos disponibles:" />} />
+    <Route path="/item/:id" element={<ItemDetailContainer />} />
+    <Route path="*" element={<Error />} />
+</Routes>
+```
+
+### Filtro por categoría
+
+Los links del navbar apuntan a `/category/<categoria>`. Las categorías disponibles son **Perifericos**, **Electricidad** y **Equipos**.
+
+`ItemListContainer` lee el parámetro de la URL con `useParams` y filtra los productos. Si no hay categoría (ruta `/`), muestra todos. Como `categoryId` está en el array de dependencias, el `useEffect` se vuelve a ejecutar cada vez que cambia la categoría:
+
+```jsx
+const { categoryId } = useParams()
+
+useEffect(() => {
+    const fetchProducts = async () => {
+        setLoading(true)
+        setError(null)
+        try {
+            const data = await getProducts()
+            const filtered = categoryId
+                ? data.filter((p) => p.category === categoryId)
+                : data
+            setData(filtered)
+        } catch (err) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+    fetchProducts()
+}, [categoryId])
+```
+
+### Detalle de producto
+
+Cada card tiene un botón que navega a `/item/:id`. `ItemDetailContainer` toma el `id` de la URL con `useParams` y pide ese producto con `getProductById`:
+
+```jsx
+const { id } = useParams()
+
+useEffect(() => {
+    getProductById(id)
+        .then((p) => setProduct(p))
+        .catch((e) => setError(e.message))
+}, [id])
+```
+
+`useParams` devuelve el `id` siempre como string, mientras que en los mocks es un número. Por eso `getProductById` compara ambos como string:
+
+```js
+const product = products.find((p) => String(p.id) === String(productId))
+```
+
+Si el producto no existe, la promesa se rechaza con el mensaje "Producto no encontrado", que se muestra en pantalla.
+
 ## Carga asíncrona de productos
 
-Los productos no están escritos en el JSX: vienen de una promesa que simula una API.
+Los productos no están escritos en el JSX: vienen de promesas que simulan una API.
 
-### La promesa
+### Las promesas
 
 En `src/mocks/AsyncMoks.js`, la función `getProducts` devuelve una `Promise` que se resuelve a los 2 segundos con el array de productos:
 
@@ -28,54 +101,32 @@ export const getProducts = () => {
 }
 ```
 
-El `setTimeout` simula el tiempo de respuesta de un servidor. Si la promesa se rechazara (`reject`), el error se captura en el componente.
+En `src/services/getProductById.js`, `getProductById` busca un producto por id y lo resuelve (o rechaza si no existe), también con 2 segundos de demora.
 
-### Integración con `useEffect`
+El `setTimeout` simula el tiempo de respuesta de un servidor. Si una promesa se rechaza (`reject`), el error se captura en el componente.
 
-`ItemListContainer` pide los productos una sola vez, cuando el componente se monta. Para eso usa `useEffect` con el array de dependencias vacío (`[]`) y una función `async` con `try/catch/finally`:
-
-```jsx
-useEffect(() => {
-    const fetchProducts = async () => {
-        try {
-            const products = await getProducts()
-            setItems(products)
-        } catch (err) {
-            setError("No pudimos cargar los productos.")
-        } finally {
-            setLoading(false)
-        }
-    }
-    fetchProducts()
-}, [])
-```
-
-Flujo completo:
-
-1. El componente se renderiza por primera vez con `items = []` y `loading = true`, y muestra "Cargando productos...".
-2. Después del primer render, `useEffect` ejecuta `fetchProducts`.
-3. `await` espera a que la promesa se resuelva (2 segundos).
-4. Si sale bien, los productos se guardan en el estado `items` y React vuelve a renderizar.
-5. Si falla, se guarda un mensaje en `error`.
-6. En ambos casos, `finally` pone `loading` en `false`, así que la pantalla nunca queda cargando para siempre.
-
-### Estados del componente
+### Estados de los componentes
 
 | Estado | Para qué sirve |
 |---|---|
-| `items` | Guarda los productos obtenidos |
+| `data` / `product` | Guarda los productos (o el producto) obtenidos |
 | `loading` | Indica si la carga está en curso |
 | `error` | Guarda el mensaje si algo falla |
 
+En el listado, el bloque `try/catch/finally` garantiza que `loading` siempre vuelva a `false`, así la pantalla nunca queda cargando para siempre.
+
 ### Separación de responsabilidades
 
-- `ItemListContainer`: obtiene los datos y maneja los estados de carga y error.
+- `ItemListContainer`: obtiene los datos, filtra por categoría y maneja los estados de carga y error.
 - `ItemList`: recibe los productos por props y los recorre con `.map()`, usando el `id` como `key`.
 - `Item`: muestra la card de un producto.
+- `ItemDetailContainer`: obtiene un producto según el `id` de la URL.
+- `ItemDetail`: muestra el detalle de ese producto.
 
 ## Tecnologías
 
 - React
+- React Router
 - Vite
 - React Bootstrap y Bootstrap
 - CSS
@@ -104,7 +155,7 @@ industrial-multiservicios-93510/
 ├── public/
 │   └── images/
 │       ├── bomba_industrial.webp
-|       ├── equipos_mantenimiento.webp
+│       ├── equipos_mantenimiento.webp
 │       ├── motor_electrico.webp
 │       ├── sensores_industriales.webp
 │       └── tablero_electrico.webp
@@ -115,9 +166,15 @@ industrial-multiservicios-93510/
     │   ├── Footer.jsx
     │   ├── Item.jsx / .css
     │   ├── ItemCount.jsx / .css
-    |   ├── ItemList.jsx
+    │   ├── ItemDetail.jsx
+    │   ├── ItemDetailContainer.jsx
+    │   ├── ItemList.jsx
     │   ├── ItemListContainer.jsx / .css
     │   └── Navbar.jsx
+    ├── mocks/
+    │   └── AsyncMoks.js
+    ├── services/
+    │   └── getProductById.js
     ├── App.jsx
     ├── index.css
     └── main.jsx

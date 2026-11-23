@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "./Item.css"
+import { Link } from "react-router-dom"
 
 function Item({ product }) {
     const { name, price, category, img } = product
@@ -24,7 +25,7 @@ function Item({ product }) {
                 <span className="product-category">{category}</span>
                 <h3>{name}</h3>
                 <span className="product-price">${price}</span>
-                <button className="detail-btn">Ver detalle</button>
+                <Link to={`/item/${product.id}`} className="btn btn-primary">Ver detalles</Link>
             </div>
         </article>
     )
