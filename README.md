@@ -29,12 +29,10 @@ La navegación se hace con `react-router-dom`. Las rutas se definen en `App.jsx`
 
 ```jsx
 <Routes>
-    <Routes>
           <Route path="/" element={<ItemListContainer greeting="¡Bienvenido a mi App!" subtitle="Nuestros productos" />} />
           <Route path="/category/:categoryId" element={<ItemListContainer greeting="Estas en la categoria:" subtitle="Productos disponibles:" />} />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
           <Route path="*" element={<Error />} />
-        </Routes>
 </Routes>
 ```
 

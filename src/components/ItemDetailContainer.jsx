@@ -13,6 +13,7 @@ function ItemDetailContainer() {
 
     useEffect(() => {
         setLoading(true);
+        setError(null);
         getProductById(id)
             .then((p) => setProduct(p))
             .catch((e) => setError(e.message))

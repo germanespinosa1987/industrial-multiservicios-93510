@@ -37,15 +37,22 @@ function ItemListContainer({ greeting, subtitle }) {
             <h1 className="item-list-title">{greeting} {categoryId}</h1>
             <h2 className="item-list-subtitle">{subtitle}</h2>
 
-            {loading && (
-                <div className="item-list">
-                    {Array.from({ length: skeletonCount }).map((_, i) => (
-                        <ItemSkeleton key={i} />
-                    ))}
-                </div>
-            )}
-            {error && <h2>{error}</h2>}
-            {!loading && !error && <ItemList items={items} />}
+{loading && (
+    <div className="item-list">
+        {Array.from({ length: skeletonCount }).map((_, i) => (
+            <ItemSkeleton key={i} />
+        ))}
+    </div>
+)}
+{error && <h2>{error}</h2>}
+{!loading && !error && items.length === 0 && (
+    <p className="item-list-empty">
+        {categoryId
+            ? `No hay productos en la categoría "${categoryId}".`
+            : "No hay productos disponibles."}
+    </p>
+)}
+{!loading && !error && items.length > 0 && <ItemList items={items} />}
         </section>
     )
 }
