@@ -1,6 +1,6 @@
 export const products = [
     {
-        id: 1,
+        // id: 1,
         name: "Bomba industrial",
         description: "Bomba industrial de alta calidad para uso en entornos industriales.",
         price: 450000,
